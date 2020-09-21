@@ -1,4 +1,4 @@
-var Product = require('../models/product');
+var Product = require('../models/produto');
 var os = require('os');
 
 exports.productCreate = function (req, res) {

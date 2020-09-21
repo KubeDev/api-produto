@@ -24,18 +24,18 @@ app.get('/health', (res, req) => {
     }        
 });
 
-app.use('/api/products', product);
+app.use('/api/produto', product);
 
 var developer_db_url = 'mongodb://mongouser:mongopwd@localhost:27017/admin';
 var mongoDB = process.env.MONGODB_URI || developer_db_url;
 
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.on('error', console.error.bind(console, 'Erro ao conectar com o banco de dados MongoDB:'));
 
 var port = 8080;
 
 mongoose.connect(mongoDB);
 app.listen(port, () => {
-    console.log('Server is up and running on port numner ' + port);
+    console.log('Servidor rodando na porta ' + port);
 });
