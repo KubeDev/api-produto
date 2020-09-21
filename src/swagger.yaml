@@ -1,0 +1,109 @@
+---
+swagger: "2.0"
+info:
+  description: "API de Cadastro de Produtos"
+  version: "1.0.0"
+  title: "Cadastro de Produtos"
+  contact:
+    email: "fabricio@veronez.dev"
+paths:
+  /api/produto/{id}:
+    get:
+      description: "Listagem de um produto\n"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id do produto"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Resultado da busca"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Produto"
+        "400":
+          description: "bad input parameter"
+    put:
+      description: "Atualização de um produto"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id do produto"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Produto que será atualizado"
+        required: true
+        schema:
+          $ref: "#/definitions/Produto"
+      responses:
+        "200":
+          description: "OK"
+    delete:
+      description: "Exclusão de um produto"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id do produto"
+        required: true
+        type: "string"
+      responses:
+        "204":
+          description: "OK"
+        "400":
+          description: "Produto inválido"
+        "404":
+          description: "Produto não encontrado"
+  /api/produto:
+    get:
+      description: "Listagem de todos os produtos\n"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "Resultado da busca"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Produto"
+        "400":
+          description: "bad input parameter"
+    post:
+      description: "Cadastro de um produto"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Produto que será cadastrado"
+        required: true
+        schema:
+          $ref: "#/definitions/Produto"
+      responses:
+        "200":
+          description: "OK"
+definitions:
+  Produto:
+    type: "object"
+    required:
+    - "categoria"
+    - "nome"
+    - "preco"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      nome:
+        type: "string"
+        example: "Geladeira"
+      preco:
+        type: "number"
+        example: 500.0
+      categoria:
+        type: "string"
+        example: "Eletrodomésticos"
