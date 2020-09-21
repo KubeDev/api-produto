@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const product = require('./routes/product'); 
+const product = require('./routes/produto'); 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));

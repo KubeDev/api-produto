@@ -4,9 +4,9 @@ var os = require('os');
 exports.productCreate = function (req, res) {
     var product = new Product(
         {
-            name: req.body.name,
-            price: req.body.price,
-            category: req.body.category
+            nome: req.body.nome,
+            preco: req.body.preco,
+            categoria: req.body.categoria
         }
     );
 
