@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: produto-api-deployment
+spec:    
+  selector:    
+    matchLabels:
+      app: produto-api      
+  template:
+    metadata:      
+      labels:
+        app: produto-api                
+    spec:
+      containers:
+      - name: api
+        image: kubedevio/api-produto:v1        
+        resources: {}              
+        ports:
+        - containerPort: 8080
+        env:
+          - name: MONGODB_URI
+            value: mongodb://mongouser:mongopwd@mongo-service:27017/admin
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080

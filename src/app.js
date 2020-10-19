@@ -32,15 +32,23 @@ app.get('/health', (res, req) => {
 app.use('/api/produto', product);
 
 var developer_db_url = 'mongodb://mongouser:mongopwd@localhost:27017/admin';
-var mongoDB = process.env.MONGODB_URI || developer_db_url;
+var mongoUrl = process.env.MONGODB_URI || developer_db_url;
 
 mongoose.Promise = global.Promise;
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'Erro ao conectar com o banco de dados MongoDB:'));
 
-var port = 8080;
+var connectWithRetry = function() {
+    return mongoose.connect(mongoUrl, function(err) {
+      if (err) {
+        console.error('Failed to connect to mongo on startup - retrying in 5 sec', err);
+        setTimeout(connectWithRetry, 5000);
+      }
+    });
+  };
+  
+connectWithRetry();
 
-mongoose.connect(mongoDB);
+var port = 8181;
+
 app.listen(port, () => {
     console.log('Servidor rodando na porta ' + port);
 });
