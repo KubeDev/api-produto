@@ -7,7 +7,11 @@ const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./swagger.yaml');
 const NodeHog = require('nodehog');
+const config = require('./config/system-life');
 
+app.use(config.middlewares.healthMid);
+app.use(config.middlewares.readMid);
+app.use('/config', config.routers);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument)); 
 
 app.use(bodyParser.json());
