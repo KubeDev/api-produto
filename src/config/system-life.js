@@ -7,6 +7,17 @@ let isRead = () => {
     return readTime < new Date(Date.now());
 };
 
+router.get('/read', (req, res) => {
+   
+    if (isRead()) {
+        res.statusCode = 200;
+        return res.send('Ok');
+    } else {
+        res.statusCode = 500;
+        return res.send('');
+    }   
+});
+
 router.put('/unhealth', (req, res) => {
 
     isHealth = false;
@@ -30,15 +41,5 @@ var healthMid = function (req, res, next) {
     }   
 };
 
-var readMid = function (req, res, next) {
-    
-    if (isRead()) {
-        next();
-    } else {
-        res.statusCode = 500;
-        return res.send('');
-    }   
-};
-
 exports.routers = router;
-exports.middlewares = {readMid, healthMid};
+exports.middlewares = { healthMid};
