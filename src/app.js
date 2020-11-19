@@ -6,7 +6,8 @@ const product = require('./routes/produto');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./swagger.yaml');
- 
+const NodeHog = require('nodehog');
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument)); 
 
 app.use(bodyParser.json());
@@ -29,6 +30,16 @@ app.get('/health', (res, req) => {
     }        
 });
 
+app.get('/stress/:elemento/tempostress/:tempoStress/tempofolga/:tempoFolga/ciclos/:ciclos', (req, res) => {
+    
+    const elemento = req.params.elemento;
+    const tempoStress = req.params.tempoStress * 1000;
+    const tempoFolga = req.params.tempoFolga * 1000;
+    const ciclos = req.params.ciclos;
+    new NodeHog(elemento, tempoStress, tempoFolga, ciclos).start();
+    res.send("OK");
+});
+
 app.use('/api/produto', product);
 
 var developer_db_url = 'mongodb://mongouser:mongopwd@localhost:27017/admin';
@@ -38,16 +49,16 @@ mongoose.Promise = global.Promise;
 
 var connectWithRetry = function() {
     return mongoose.connect(mongoUrl, function(err) {
-      if (err) {
-        console.error('Failed to connect to mongo on startup - retrying in 5 sec', err);
-        setTimeout(connectWithRetry, 5000);
-      }
+        if (err) {
+            console.error('Failed to connect to mongo on startup - retrying in 5 sec', err);
+            setTimeout(connectWithRetry, 5000);
+        }
     });
-  };
+};
   
 connectWithRetry();
 
-var port = 8181;
+var port = process.env.SERVER_PORT || 8080;
 
 app.listen(port, () => {
     console.log('Servidor rodando na porta ' + port);
