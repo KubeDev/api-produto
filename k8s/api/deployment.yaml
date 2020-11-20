@@ -20,7 +20,4 @@ spec:
         env:
           - name: MONGODB_URI
             value: mongodb://mongouser:mongopwd@mongo-service:27017/admin
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 8080
+
