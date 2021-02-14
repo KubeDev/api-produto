@@ -8,7 +8,9 @@ const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./swagger.yaml');
 const NodeHog = require('nodehog');
 const config = require('./config/system-life');
+const apiMetrics = require('prometheus-api-metrics');
 
+app.use(apiMetrics())
 app.use(config.middlewares.healthMid);
 app.use('/config', config.routers);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument)); 
