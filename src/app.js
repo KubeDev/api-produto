@@ -15,7 +15,7 @@ const metricsMiddleware = promBundle({
         includePath: true, 
         customLabels: 
             { 
-                project_version: '2.0' 
+                project_version: '1.0' 
             } 
     });
 
