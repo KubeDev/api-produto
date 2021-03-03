@@ -7,6 +7,67 @@ info:
   contact:
     email: "fabricio@veronez.dev"
 paths:
+  /read:
+    get:
+      description: "Verificação se a aplicação está pronta"
+      responses:
+        "200":
+          description: "Status pronto"
+        "500":
+          description: "Status não pronto"  
+  /unreadfor/{seconds}:
+    put:
+      description: "Atualização de um produto"
+      parameters:
+      - name: "seconds"
+        in: "path"
+        description: "Número de segundos como não pronto"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "OK"   
+  /health:
+    get:
+      description: "Verificação se a aplicação está saudável"
+      responses:
+        "200":
+          description: "Status saudável"
+        "500":
+          description: "Status não saudável"    
+  /unhealth:
+    put:
+      description: "Faz com que a aplicação pare de responder"
+      responses:
+        "200":
+          description: "Ok" 
+  /stress/{elemento}/tempostress/{tempoStress}/intervalo/{intervalo}/ciclos/{ciclos}:
+    put:
+      description: "Faz a aplicação consumir mais recurso"
+      parameters:
+      - name: "elemento"
+        in: "path"
+        description: "Elemento pra estressar. Pode ser memory ou cpu"
+        required: true
+        type: "string"
+      - name: "tempoStress"
+        in: "path"
+        description: "Tempo em segundos pra estressar o elemento"
+        required: true
+        type: "string"
+      - name: "intervalo"
+        in: "path"
+        description: "Intervalo de tempo entre um stress e outro"
+        required: true
+        type: "string"
+      - name: "ciclos"
+        in: "path"
+        description: "Número de ciclos de stress"
+        required: true
+        type: "string"                        
+      responses:
+        "200":
+          description: "OK"        
   /api/produto/{id}:
     get:
       description: "Listagem de um produto\n"
