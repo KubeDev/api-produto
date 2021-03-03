@@ -21,7 +21,7 @@ const metricsMiddleware = promBundle({
 
 app.use(metricsMiddleware);
 app.use(config.middlewares.healthMid);
-app.use('/config', config.routers);
+app.use('/', config.routers);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -43,7 +43,7 @@ app.get('/health', (res, req) => {
     }
 });
 
-app.get('/stress/:elemento/tempostress/:tempoStress/tempofolga/:tempoFolga/ciclos/:ciclos', (req, res) => {
+app.put('/stress/:elemento/tempostress/:tempoStress/intervalo/:intervalo/ciclos/:ciclos', (req, res) => {
 
     const elemento = req.params.elemento;
     const tempoStress = req.params.tempoStress * 1000;
