@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: viniciusgalli/api-produtos-k8s:v2
+          image: viniciusgalli/api-produtos-k8s
           ports:
             - containerPort: 8080
           env:
