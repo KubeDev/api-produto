@@ -24,6 +24,6 @@ jobs:
          file: ./src/Dockerfile
          push: true
          tags: |
-            moraesjeremias/api-produto-kubedev:latest
-            moraesjeremias/api-produto-kubedev:${{github.GITHUB_SHA}}
+            $DOCKER_HUB_ACCOUNT/api-produto-kubedev:latest
+            $DOCKER_HUB_ACCOUNT/api-produto-kubedev:$GITHUB_SHA
          
