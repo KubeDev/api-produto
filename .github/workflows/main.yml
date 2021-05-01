@@ -1,0 +1,17 @@
+name: KubeDev-Product-API-CICD-Pipeline
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+jobs:
+  dockerPipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Docker Login
+        uses: docker/login-action@v1.9.0
+        with:
+          username: ${{secrets.DOCKER_HUB_ACCOUNT}}
+          password: ${{secrets.DOCKER_HUB_PWD}}
