@@ -43,6 +43,6 @@ jobs:
           file: ./src/Dockerfile
           # List of metadata for an image
           push: true
-          tags: 
+          tags: | 
             nunorcsousa/api-produto:latest
             nunorcsousa/api-produto:${{github.run_number}}
