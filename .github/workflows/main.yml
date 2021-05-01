@@ -44,5 +44,5 @@ jobs:
           # List of metadata for an image
           push: true
           tags: 
-            nunorcsousa/api-bootcamp-produto:latest
-            nunorcsousa/api-bootcamp-produto:${{github.run_number}}
+            nunorcsousa/api-produto:latest
+            nunorcsousa/api-produto:${{github.run_number}}
