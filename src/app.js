@@ -55,12 +55,12 @@ app.put('/stress/:elemento/tempostress/:tempoStress/intervalo/:intervalo/ciclos/
 
 app.use('/api/produto', product);
 
-var developer_db_url = 'mongodb://mongouser:mongopwd@localhost:27017/admin';
-var mongoUrl = process.env.MONGODB_URI || developer_db_url;
+const developer_db_url = `mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME}:${process.env.MONGO_INITDB_ROOT_PASSWORD}@localhost:27017/admin`;
+const mongoUrl = process.env.MONGODB_URI || developer_db_url;
 
 mongoose.Promise = global.Promise;
 
-var connectWithRetry = function () {
+const connectWithRetry = function () {
     return mongoose.connect(mongoUrl, function (err) {
         if (err) {
             console.error('Failed to connect to mongo on startup - retrying in 5 sec', err);
@@ -71,7 +71,7 @@ var connectWithRetry = function () {
 
 connectWithRetry();
 
-var port = process.env.SERVER_PORT || 8080;
+const port = process.env.SERVER_PORT || 8080;
 
 app.listen(port, () => {
     console.log('Servidor rodando na porta ' + port);
