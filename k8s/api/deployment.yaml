@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubedev-product-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kubedev-product-api
+  template:
+    metadata:
+      labels:
+        app: kubedev-product-api
+    spec:
+      containers:
+        - name: kubedev-product-api
+          resources:
+            limits:
+              cpu: 1
+              memory: 128M
+          image: moraesjeremias/api-produto-kubedev:v2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: mongodb-credentials
+          env:
+            - name: MONGODB_URI
+              value: "mongodb://$(MONGO_INITDB_ROOT_USERNAME):$(MONGO_INITDB_ROOT_PASSWORD)@mongodb-svc:27017/admin"
