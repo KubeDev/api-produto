@@ -16,7 +16,7 @@ spec:
         - name: kubedev-product-api
           resources:
             limits:
-              cpu: 1
+              cpu: 100m
               memory: 128M
           image: moraesjeremias/api-produto-kubedev:v2
           imagePullPolicy: IfNotPresent
