@@ -41,7 +41,7 @@ exports.productAll = function (req, res) {
             return res.json(err);
         }       
 
-        var retu = { product, machine: os.hostname() };
+        var retu = { product, machine: os.hostname(), version: "3.0" };
 
         res.json(retu);
     })
