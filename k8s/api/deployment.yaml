@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: api
 spec:
+  replicas: 20
   selector:
     matchLabels:
       app: api
@@ -13,7 +14,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: ulissesdevops/api-bootcamp-produto:v1 
+        image: ulissesdevops/api-bootcamp-produto
         ports:
         - containerPort: 8080
         env:
@@ -33,5 +34,5 @@ spec:
     - port: 80
       targetPort: 8080
       nodePort: 30000
-  type: NodePort    
+  type: LoadBalancer    
   
