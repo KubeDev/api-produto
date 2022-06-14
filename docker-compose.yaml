@@ -8,7 +8,7 @@ networks:
 
 services:
   api:
-    image: 'frafaelptu/api-produto:v1'
+    image: 'frafaelptu/api-produto:${TAG}'
     ports:
       - 8080:8080
     networks:
