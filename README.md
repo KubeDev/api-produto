@@ -6,7 +6,7 @@ KubeDev
 Criação manual sem dockercompose
 
 docker network create produto_net
-docker network connect produto_net <container_id>  
+docker network connect produto_net <container_id>
 
 docker volume create mongo_vol
 
