@@ -9,6 +9,9 @@ networks:
 services:
   api:
     image: 'frafaelptu/api-produto:${TAG}'
+    build:
+      dockerfile: ./Dockerfile
+      context: ./src
     ports:
       - 8080:8080
     networks:
