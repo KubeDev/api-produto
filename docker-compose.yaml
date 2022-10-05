@@ -1,0 +1,35 @@
+version: '3.8'
+
+volumes:
+  mongo_vol:
+
+networks:
+  produto_net:
+    driver: bridge
+
+services:
+  api:
+    env_file: .env
+    image: rafaelroxen/api-produto:${TAG}
+    ports:
+      - 8080:8080
+    networks:
+      - produto_net
+    environment:
+      MONGODB_URI: mongodb://mongouser:mongopwd@mongodb:27017/admin
+    depends_on:
+      - mongodb
+
+  
+  mongodb:
+    image: mongo:4.4.3
+    ports:
+      - 27017:27017
+    networks:
+      - produto_net
+    volumes:
+      - mongo_vol:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongouser
+      MONGO_INITDB_ROOT_PASSWORD: mongopwd
+
